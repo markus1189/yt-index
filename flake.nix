@@ -13,8 +13,8 @@
           cat channels.txt |
             parallel --line-buffer -n1 -j 10 -I{} yt-dlp --dump-json "{}" |
             tee content.json |
-            while read l; do echo '.'; done
+            pv -betlap l > /dev/null
         '';
-      in mkShell { buildInputs = [ yt-dlp parallel runScript git-lfs ]; };
+      in mkShell { buildInputs = [ yt-dlp parallel runScript git-lfs pv ]; };
   };
 }
