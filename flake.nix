@@ -15,6 +15,6 @@
             tee content.json |
             while read l; do echo '.'; done
         '';
-      in mkShell { buildInputs = [ yt-dlp parallel runScript ]; };
+      in mkShell { buildInputs = [ yt-dlp parallel runScript git-lfs ]; };
   };
 }
