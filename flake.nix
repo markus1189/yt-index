@@ -11,7 +11,7 @@
           set -euo pipefail
 
           cat channels.txt |
-            parallel --line-buffer -n1 -j 10 -I{} yt-dlp --dump-json "{}" |
+            parallel --line-buffer -n1 -j1 -I{} yt-dlp --retries 50 --retry-sleep exp=1:64 --dump-json "{}" |
             jq -c 'delpaths([["formats"],["thumbnails"],["automatic_captions"],["subtitles"]])' |
             tee content.json |
             pv -betlapf -i 30 > /dev/null
